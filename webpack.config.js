@@ -1,13 +1,13 @@
-const path = require('path')
-const webpack = require('webpack')
-const { VueLoaderPlugin } = require("vue-loader")
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ESLintPlugin = require('eslint-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const { merge } = require('webpack-merge');
+const { VueLoaderPlugin } = require("vue-loader");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
-const config = require(path.resolve(__dirname, 'webpack', process.env.NODE_ENV))
+const config = require(path.resolve(__dirname, 'webpack', process.env.NODE_ENV));
 
-module.exports = {
-  ...config.base,
+const baseConfig = {
   entry: path.resolve(__dirname, 'src', 'index.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -15,7 +15,6 @@ module.exports = {
   },
   module: {
     rules: [
-      ...config.rules,
       {
         test: /\.vue?$/,
         loader: 'vue-loader',
@@ -53,7 +52,6 @@ module.exports = {
     ],
   },
   plugins: [
-    ...config.plugins,
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.html'),
@@ -64,4 +62,11 @@ module.exports = {
     }),
     new ESLintPlugin()
   ],
-}
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src/')
+    }
+  }
+};
+
+module.exports = merge(baseConfig, config);
