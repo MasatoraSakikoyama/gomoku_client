@@ -9,6 +9,7 @@ module.exports = {
     index: 'index.html',
     host: '0.0.0.0',
     port: 8080,
+    writeToDisk: true,
   },
   module: {
     rules: [

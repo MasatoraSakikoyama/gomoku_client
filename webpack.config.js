@@ -25,10 +25,6 @@ const baseConfig = {
         }
       },
       {
-        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-        type: "asset",
-      },
-      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: [
@@ -49,6 +45,18 @@ const baseConfig = {
           }
         ]
       },
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+        exclude: path.resolve(__dirname, 'src', 'index.html'),
+        options: {
+          esModule: false,
+        },
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+        type: "asset",
+      },
     ],
   },
   plugins: [
@@ -57,7 +65,6 @@ const baseConfig = {
       template: path.resolve(__dirname, 'src', 'index.html'),
       favicon: path.resolve(__dirname, 'src', 'favicon.ico'),
       title: 'title',
-      publicPath: '',
       hash: true
     }),
     new ESLintPlugin()
