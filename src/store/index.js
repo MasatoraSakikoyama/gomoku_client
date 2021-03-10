@@ -8,5 +8,5 @@ export default createStore({
     test,
   },
   strict: debug,
-  plugins: debug ? [ createLogger() ] : [],
+  plugins: debug ? [createLogger()] : [],
 });

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default {
-  getTest () {
+  getTest() {
     return axios.get('/api');
   },
 };

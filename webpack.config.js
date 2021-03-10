@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const { merge } = require('webpack-merge');
-const { VueLoaderPlugin } = require("vue-loader");
+const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
@@ -11,7 +11,8 @@ const baseConfig = {
   entry: path.resolve(__dirname, 'src', 'index.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].js'
+    filename: '[name].[contenthash].js',
+    clean: true,
   },
   module: {
     rules: [
@@ -33,9 +34,9 @@ const baseConfig = {
             options: {
               presets: [
                 [
-                  "@babel/preset-env",
+                  '@babel/preset-env',
                   {
-                    targets: { ie: "11" },
+                    targets: { ie: '11' },
                     useBuiltIns: 'entry',
                     corejs: 3
                   }
@@ -55,7 +56,7 @@ const baseConfig = {
       },
       {
         test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-        type: "asset",
+        type: 'asset/resource',
       },
     ],
   },
@@ -63,7 +64,7 @@ const baseConfig = {
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.html'),
-      favicon: path.resolve(__dirname, 'src', 'favicon.ico'),
+      favicon: path.resolve(__dirname, 'src', 'assets', 'favicon.ico'),
       title: 'title',
       hash: true
     }),
